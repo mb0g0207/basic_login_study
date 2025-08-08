@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login</title>
+    <style>
+        /* CSS Reset - Đặt lại CSS mặc định */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Thiết lập giao diện tổng thể cho body */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Font chữ */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Nền gradient */
+            min-height: 100vh; /* Chiều cao tối thiểu bằng màn hình */
+            display: flex; /* Sử dụng flexbox */
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            padding: 20px 40px; /* Khoảng cách padding */
+        }
+
+        /* Container chính chứa form đăng nhập */
+        .login-container {
+            width: 100%; /* Chiều rộng 100% */
+            max-width: 400px; /* Chiều rộng tối đa 400px */
+            background: white; /* Nền màu trắng */
+            padding: 40px; /* Khoảng cách bên trong */
+            border-radius: 10px; /* Bo góc */
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+        }
+
+        /* Phần header của form đăng nhập */
+        .login-header {
+            text-align: center; /* Căn giữa text */
+            margin-bottom: 30px; /* Khoảng cách dưới */
+        }
+
+        /* Tiêu đề chính */
+        .login-header h1 {
+            color: #333; /* Màu chữ */
+            font-size: 28px; /* Kích thước chữ */
+            margin-bottom: 10px; /* Khoảng cách dưới */
+        }
+
+        /* Mô tả phụ */
+        .login-header p {
+            color: #666; /* Màu chữ xám */
+            font-size: 14px; /* Kích thước chữ */
+        }
+
+        /* Nhóm các trường input */
+        .form-group {
+            margin-bottom: 20px; /* Khoảng cách dưới mỗi nhóm */
+        }
+
+        /* Nhãn của các trường input */
+        .form-group label {
+            display: block; /* Hiển thị dạng block */
+            margin-bottom: 8px; /* Khoảng cách dưới */
+            color: #333; /* Màu chữ */
+            font-weight: 500; /* Độ đậm chữ */
+            font-size: 14px; /* Kích thước chữ */
+        }
+
+        /* Các trường input text, email, password */
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%; /* Chiều rộng 100% */
+            padding: 12px; /* Khoảng cách bên trong */
+            border: 2px solid #e1e1e1; /* Đường viền */
+            border-radius: 6px; /* Bo góc */
+            font-size: 14px; /* Kích thước chữ */
+            transition: border-color 0.3s; /* Hiệu ứng chuyển đổi màu viền */
+        }
+
+        /* Nhóm checkbox */
+        .checkbox-group {
+            display: flex; /* Sử dụng flexbox */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-bottom: 25px; /* Khoảng cách dưới */
+            gap: 10px; /* Khoảng cách giữa các phần tử */
+        }
+
+        /* Checkbox input */
+        .checkbox-group input[type="checkbox"] {
+            margin: 0; /* Bỏ margin mặc định */
+        }
+
+        /* Nhãn của checkbox */
+        .checkbox-group label {
+            font-size: 14px; /* Kích thước chữ */
+            color: #333; /* Màu chữ */
+            cursor: pointer; /* Con trỏ pointer khi hover */
+            margin: 0; /* Bỏ margin */
+        }
+
+        /* Liên kết quên mật khẩu */
+        .forgot-password {
+            text-align: right; /* Căn phải */
+            margin-bottom: 25px; /* Khoảng cách dưới */
+        }
+
+        /* Liên kết trong phần quên mật khẩu */
+        .forgot-password a {
+            color: #667eea; /* Màu xanh */
+            text-decoration: none; /* Bỏ gạch chân */
+            font-size: 14px; /* Kích thước chữ */
+        }
+
+        /* Hiệu ứng hover cho liên kết quên mật khẩu */
+        .forgot-password a:hover {
+            text-decoration: underline; /* Thêm gạch chân khi hover */
+        }
+
+        /* Nút đăng nhập */
+        .login-btn {
+            width: 100%; /* Chiều rộng 100% */
+            padding: 12px; /* Khoảng cách bên trong */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Nền gradient */
+            color: white; /* Màu chữ trắng */
+            border: none; /* Bỏ viền */
+            border-radius: 6px; /* Bo góc */
+            font-size: 16px; /* Kích thước chữ */
+            font-weight: 600; /* Độ đậm chữ */
+            cursor: pointer; /* Con trỏ pointer */
+            transition: transform 0.2s, opacity 0.2s; /* Hiệu ứng chuyển đổi */
+        }
+
+        /* Hiệu ứng hover cho nút đăng nhập */
+        .login-btn:hover {
+            transform: translateY(-2px); /* Di chuyển lên trên 2px */
+        }
+
+        /* Trạng thái disabled của nút */
+        .login-btn:disabled {
+            opacity: 0.6; /* Độ mờ */
+            cursor: not-allowed; /* Con trỏ không cho phép */
+            transform: none; /* Bỏ hiệu ứng transform */
+        }
+
+        /* Liên kết đến trang đăng ký */
+        .register-link {
+            text-align: center; /* Căn giữa */
+            margin-top: 20px; /* Khoảng cách trên */
+            font-size: 14px; /* Kích thước chữ */
+            color: #666; /* Màu chữ xám */
+        }
+
+        /* Liên kết trong phần đăng ký */
+        .register-link a {
+            color: #667eea; /* Màu xanh */
+            text-decoration: none; /* Bỏ gạch chân */
+            font-weight: 500; /* Độ đậm chữ */
+        }
+
+        /* Hiệu ứng hover cho liên kết đăng ký */
+        .register-link a:hover {
+            text-decoration: underline; /* Thêm gạch chân khi hover */
+        }
+
+        /* Thông báo thành công */
+        .success-message {
+            background-color: #d4edda; /* Nền xanh lá nhạt */
+            color: #155724; /* Chữ xanh lá đậm */
+            padding: 12px; /* Khoảng cách bên trong */
+            border-radius: 6px; /* Bo góc */
+            margin-bottom: 20px; /* Khoảng cách dưới */
+            display: none; /* Ẩn mặc định */
+        }
+    </style>
+</head>
+<body>
+    <!-- Container chính chứa toàn bộ form đăng nhập -->
+    <div class="login-container">
+        <!-- Phần header với tiêu đề và mô tả -->
+        <div class="login-header">
+            <h1>Welcome Back</h1> <!-- Tiêu đề chính -->
+            <p>Please sign in to your account</p> <!-- Mô tả phụ -->
+        </div>
+
+        <!-- Thông báo thành công (ẩn mặc định) -->
+        <div class="success-message" id="successMessage">
+            Login successful! Redirecting... <!-- Thông báo đăng nhập thành công -->
+        </div>
+
+        <!-- Form đăng nhập -->
+        <div id="loginForm">
+            <!-- Nhóm trường Username/Email -->
+            <div class="form-group">
+                <label for="username">Username or Email *</label> <!-- Nhãn cho trường username -->
+                <input type="text" id="username" name="username" required> <!-- Trường nhập username/email -->
+            </div>
+
+            <!-- Nhóm trường Password -->
+            <div class="form-group">
+                <label for="password">Password *</label> <!-- Nhãn cho trường password -->
+                <input type="password" id="password" name="password" required> <!-- Trường nhập mật khẩu -->
+            </div>
+
+            <!-- Checkbox "Ghi nhớ đăng nhập" -->
+            <div class="checkbox-group">
+                <input type="checkbox" id="rememberMe" name="rememberMe"> <!-- Checkbox ghi nhớ -->
+                <label for="rememberMe">Remember me</label> <!-- Nhãn cho checkbox -->
+            </div>
+
+            <!-- Liên kết quên mật khẩu -->
+            <div class="forgot-password">
+                <a href="#">Forgot your password?</a> <!-- Link quên mật khẩu -->
+            </div>
+
+            <!-- Nút đăng nhập -->
+            <button onclick="submit()" class="login-btn">Sign In</button> <!-- Nút submit form -->
+        </div>
+
+        <!-- Liên kết đến trang đăng ký -->
+        <div class="register-link">
+            Don't have an account? <a href="register.html">Create one here</a> <!-- Link đến trang đăng ký -->
+        </div>
+    </div>
+
+    <script>
+        // Hàm xử lý đăng nhập
+        function submit(){
+            // Lấy giá trị từ các trường input
+            const username = document.getElementById('username').value; // Lấy username/email
+            const password = document.getElementById('password').value; // Lấy mật khẩu
+            const rememberMe = document.getElementById('rememberMe').checked; // Kiểm tra checkbox ghi nhớ
+
+            // Hiển thị thông báo thành công
+            successMessage.style.display = 'block';
+            
+            // Vô hiệu hóa nút đăng nhập để tránh click nhiều lần
+            document.querySelector('.login-btn').disabled = true;
+
+            // Mô phỏng chuyển hướng sau 1 giây
+            setTimeout(() => {
+                console.log('Redirecting to dashboard...'); // Log thông báo chuyển hướng
+                // Trong ứng dụng thực tế, bạn sẽ chuyển hướng tại đây
+                // window.location.href = '/dashboard';
+                
+                // Hiển thị thông tin đăng nhập (demo)
+                alert(`Login successful! \nUsername: ${username}, \nPassword: [HIDDEN], \nRemember Me: ${rememberMe}`);
+            }, 1000); // Chờ 1000ms = 1 giây
+        }
+    </script>
+</body>
+</html>
