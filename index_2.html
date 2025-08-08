@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+
+  <style>
+    body {
+      background-color: gainsboro;
+    }
+
+    .form {
+      margin: 20% 20%;
+      background-color: white;
+      padding: 20px;
+      border-radius: 16px;
+    }
+
+    .row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .field {
+      display: grid;
+      width: 100%;
+      gap: 4px;
+    }
+
+    .field input {
+      padding: 4px 14px;
+      margin-bottom: 10px;
+    }
+
+
+
+
+    }
+
+
+      .form {
+        margin: 10% 2%;
+        padding: 12px;
+      }
+
+      .row {
+        flex-direction: column;
+        gap: 0;
+      }
+  </style>
+
+  <body>
+    <div name="new" class="container">
+      <div class="row">
+        <div class="field"></div>
+
+        <div class="field">
+          <label for="last_name"
+            >Last name<font style="color: red">*</font></label
+          >
+          <input type="text" id="last_name" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="email">Email<font style="color: red">*</font></label>
+        <input type="email" id="email" />
+      </div>
+      <div class="field">
+        <label for="phone_number">Phone number</label>
+        <input type="tel" id="phone_number" />
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <input type="text" id="message" />
+      </div>
+      <div class="row">
+        <input type="checkbox" id="checkbox" />
+        <label for="checkbox">lorem ipsum dolor sit amet</label>
+      </div>
+      <button onclick="onClick()">send message</button>
+    </div>
+
+    <a href="/index_2.html" style="margin-top: 60px"
+      >nhấn đây thử nè con Lười :)))) ></a>
+  </body>
+
+  <script>
+    function onClick() {
+      alert(
+        "Con lười, \nbài tập là khi nhấn nút, sẽ xuất hiện cái thông báo như này, nhưng mà phải xuất hiện các thông tin đã điền trong cái form bên trên!"
+      );
+    }
+  </script>
+</html>
